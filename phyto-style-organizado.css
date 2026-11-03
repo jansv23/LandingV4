@@ -1,0 +1,1114 @@
+/* =============================================================
+   LABORATORIOS PHYTO — LANDING PAGE
+   CSS consolidado | Reemplaza TODO el <style> anterior
+
+   ÍNDICE
+    1. Variables y base
+    2. Layout y botones
+    3. Header
+    4. Hero
+    5. Encabezados de sección
+    6. Beneficios
+    7. Pasos
+    8. Audiencia
+    9. CTA final
+   10. Footer
+   11. CTA fijo en móvil
+   12. Animaciones
+   13. Tablet
+   14. Celular
+   15. Accesibilidad
+   ============================================================= */
+
+/* =============================================================
+   1. VARIABLES Y BASE
+   ============================================================= */
+
+/* Variables */
+:root {
+  --forest: #102f28;
+  --forest-deep: #09221d;
+  --lime: #c5ef85;
+  --lime-hover: #d6ffa1;
+  --cream: #f7f8f3;
+  --ink: #163129;
+  --muted: #5a6a63;
+  --line: #dce6dd;
+  --green: #2f7d4f;
+  --radius: 22px;
+  --shadow: 0 16px 35px rgba(16, 47, 40, .09);
+  --ease: cubic-bezier(.22, .61, .36, 1);
+}
+
+/* Reset y elementos base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'DM Sans', system-ui, Arial, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img {
+  max-width: 100%;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+h1,
+h2,
+h3 {
+  font-family: Manrope, 'DM Sans', Arial, sans-serif;
+  letter-spacing: -.04em;
+  text-wrap: balance;
+}
+p {
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+:focus-visible {
+  outline: 3px solid #8acb76;
+  outline-offset: 4px;
+}
+
+/* =============================================================
+   2. LAYOUT Y BOTONES
+   ============================================================= */
+
+/* Contenedor y secciones */
+.container {
+  width: min(1180px, calc(100% - 48px));
+  margin-inline: auto;
+}
+.section {
+  padding: clamp(64px, 8vw, 100px) 0;
+}
+
+/* Skip link (accesibilidad) */
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -60px;
+  z-index: 100;
+  padding: 12px 18px;
+  background: var(--lime);
+  color: #153021;
+  font-weight: 700;
+  border-radius: 10px;
+  transition: top .2s;
+}
+.skip-link:focus {
+  top: 16px;
+}
+
+/* Botones */
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  min-height: 52px;
+  padding: 16px 28px;
+  border-radius: 14px;
+  font-family: Manrope, sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  transition: transform .25s var(--ease), background .2s, box-shadow .25s;
+}
+.btn:hover {
+  transform: translateY(-3px);
+}
+.btn:active {
+  transform: translateY(0);
+}
+.btn-primary {
+  background: var(--lime);
+  color: #153021;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .12);
+}
+.btn-primary:hover {
+  background: var(--lime-hover);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, .16);
+}
+
+/* =============================================================
+   3. HEADER
+   ============================================================= */
+
+/* Barra de navegación */
+.navbar {
+  position: relative;
+  z-index: 3;
+  background-color: var(--forest);
+  background-image: linear-gradient(to bottom, transparent 25%, rgba(9, 34, 29, .22) 100%), url('imagenes/header.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.nav-inner {
+  min-height: 125px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* Logo */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 220px;
+  height: 80px;
+  padding: 8px 20px;
+  background: #fff;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .12);
+}
+.brand-logo {
+  display: block;
+  width: 165px;
+  height: 55px;
+  object-fit: contain;
+  border-radius: 0;
+}
+
+/* Enlace de navegación */
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 12px 22px;
+  background: #fff;
+  color: var(--forest);
+  border: 1px solid #fff;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: background .2s, color .2s, transform .25s var(--ease);
+}
+.nav-link:hover {
+  background: var(--forest);
+  color: #fff;
+  border-color: var(--forest);
+  transform: translateY(-2px);
+}
+
+/* =============================================================
+   4. HERO: BANNER ARRIBA, TEXTO E IMG5 DEBAJO
+   ============================================================= */
+
+/* Contenedor y fondo */
+.hero {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  background: linear-gradient(180deg, #204837 0%, #12362b 24%, #09221d 72%, #09221d 100%);
+  padding: 32px 0 76px;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  width: 720px;
+  height: 720px;
+  right: -330px;
+  top: 5%;
+  background: radial-gradient(circle, rgba(79, 141, 96, .15), transparent 65%);
+  pointer-events: none;
+}
+.hero-layout {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+  column-gap: 55px;
+  row-gap: 25px;
+  align-items: center;
+  padding-top: 0;
+}
+
+/* Banner superior */
+.hero-top-banner {
+  position: relative;
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: min(100%, 1050px);
+  height: auto;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 16px;
+  transform: none;
+}
+.hero-top-banner-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Texto */
+.hero-copy {
+  min-width: 0;
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 100%;
+  padding: 9px 14px;
+  border: 1px solid rgba(199, 240, 194, .26);
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .1em;
+  line-height: 1.45;
+  text-transform: uppercase;
+  color: #d5ebc8;
+}
+.eyebrow-dot {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--lime);
+  box-shadow: 0 0 0 4px rgba(197, 239, 133, .14);
+}
+.hero h1 {
+  max-width: 740px;
+  margin: 22px 0 20px;
+  font-size: clamp(36px, 3.7vw, 56px);
+  font-weight: 800;
+  line-height: 1.13;
+}
+.highlight {
+  color: var(--lime);
+}
+.hero-description {
+  max-width: 540px;
+  margin-bottom: 26px;
+  color: #c3d4cb;
+  font-size: clamp(15px, 1.35vw, 17px);
+}
+
+/* Imagen */
+.hero-art {
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-image {
+  display: block;
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, .18));
+  animation: float 6s ease-in-out infinite;
+}
+
+/* =============================================================
+   5. ENCABEZADOS DE SECCIÓN
+   ============================================================= */
+
+.section-head {
+  max-width: 760px;
+  margin-bottom: 32px;
+}
+.section-kicker {
+  display: block;
+  margin: 0 0 12px;
+  color: var(--green);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.section-title {
+  margin-bottom: 16px;
+  font-size: clamp(30px, 3.8vw, 48px);
+  font-weight: 800;
+  line-height: 1.14;
+}
+.section-head p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 16px;
+}
+
+/* =============================================================
+   6. BENEFICIOS
+   ============================================================= */
+
+/* Fondo de la sección */
+.benefits {
+  background: url("imagenes/FondoBeneficios.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Encabezado de la sección (texto claro sobre el fondo) */
+.benefits .section-kicker {
+  color: #102f28;
+  font-size: 45px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.benefits .section-head h2 {
+  color: #2a7a0b;
+}
+.benefits .section-head p {
+  color: #2a7a0b;
+}
+
+/* Grilla y tarjetas */
+.benefit-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+.benefit-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 235px;
+  padding: 32px 26px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: transform .25s var(--ease), box-shadow .25s, border-color .25s;
+  box-shadow: 0 12px 35px rgba(9, 34, 29, 0.10);
+}
+.benefit-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 24px;
+  right: 24px;
+  height: 3px;
+  background: #85be91;
+  border-radius: 0 0 4px 4px;
+}
+.benefit-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow);
+  border-color: #b5d8bd;
+}
+.benefit-card h3 {
+  margin-bottom: 10px;
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+.benefit-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13.5px;
+  line-height: 1.65;
+}
+
+/* Iconos */
+.icon-wrap {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  margin-bottom: 19px;
+  border-radius: 17px;
+  background: #e7f5e9;
+  color: #28784a;
+}
+.svg-icon {
+  width: 29px;
+  height: 29px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* =============================================================
+   7. PASOS
+   ============================================================= */
+
+/* Fondo y contenedor */
+.steps {
+  background: url("imagenes/FondoPasos.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.steps .container {
+  width: min(1320px, calc(100% - 64px));
+}
+
+/* Layout de dos columnas */
+.steps-layout {
+  display: grid;
+  grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+  gap: clamp(28px, 4vw, 64px);
+  align-items: start;
+}
+
+/* Columna izquierda: encabezado */
+.steps-head {
+  position: sticky;
+  top: 32px;
+}
+.steps-head .section-title {
+  max-width: 520px;
+  font-size: clamp(34px, 4vw, 58px);
+}
+.steps-head p {
+  max-width: 470px;
+  color: var(--muted);
+  font-size: 17px;
+}
+.steps-decoration {
+  display: block;
+  width: 64px;
+  height: 4px;
+  margin-top: 22px;
+  background: #398d60;
+  border-radius: 10px;
+}
+
+.steps-head .section-kicker {
+  color: #216d45;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.10em;
+}
+
+.steps-head .section-title {
+  color: #102f28;
+  font-weight: 800;
+  line-height: 1.12;
+}
+
+.steps-head p {
+  color: #243f34;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.7;
+}
+
+/* Columna derecha: lista de pasos */
+.steps-list {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.step {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  min-height: 150px;
+  padding: 22px;
+  background: #fff;
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: transform .25s var(--ease), box-shadow .25s;
+}
+.step:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(16, 47, 40, .08);
+}
+.step-number {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 66px;
+  height: 66px;
+  background: #eef8ed;
+  color: #328251;
+  border-radius: 20px;
+  font-family: Manrope, sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+}
+.step-text {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  min-width: 0;
+  padding-right: 30%;
+}
+.step h3 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+.step p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+.step-image {
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  bottom: 0;
+  width: 36%;
+  height: 100%;
+  object-fit: contain;
+  object-position: right bottom;
+  pointer-events: none;
+}
+
+/* Nota al pie */
+.detail-note {
+  margin: 20px 0 0;
+  padding: 16px 20px;
+
+  background: rgba(255, 255, 255, 0.92);
+  border-left: 4px solid #398d60;
+  border-radius: 12px;
+
+  color: #344b40;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+/* =============================================================
+   8. AUDIENCIA E IMG6
+   ============================================================= */
+
+.audience {
+  /* Una sola imagen, sin mosaicos ni cortes verticales. */
+  background-color: #f7faf4;
+  background-image: url("FondoFinal.png");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  text-align: center;
+  padding: clamp(56px, 7vw, 80px) 0;
+}
+.audience-inner {
+  max-width: 850px;
+  margin-inline: auto;
+}
+.audience h2:not(.section-kicker) {
+  margin-bottom: 12px;
+  font-size: clamp(26px, 3.2vw, 40px);
+  font-weight: 800;
+}
+.audience p {
+  max-width: 620px;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: 16px;
+}
+.audience-image-container {
+  width: 100%;
+  max-width: 700px;
+  margin: 28px auto 0;
+}
+.audience-image {
+  display: block;
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+/* =============================================================
+   9. CTA FINAL
+   ============================================================= */
+
+/* Sección y panel */
+.cta {
+  padding: clamp(56px, 7vw, 95px) 0 clamp(64px, 8vw, 100px);
+  background-color: #f1f7ed;
+  background-image: url("imagenes/Footer.png");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.cta-panel {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(48px, 7vw, 76px) 28px;
+  background: var(--forest);
+  color: #fff;
+  border-radius: 30px;
+  text-align: center;
+}
+.cta-panel::before,
+.cta-panel::after {
+  content: '';
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border: 1px solid rgba(197, 239, 133, .16);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.cta-panel::before {
+  left: -210px;
+  top: -160px;
+}
+.cta-panel::after {
+  right: -190px;
+  bottom: -190px;
+}
+.cta-panel > * {
+  position: relative;
+}
+
+/* Contenido del panel */
+.cta-panel .section-kicker {
+  color: var(--lime);
+}
+.cta-panel h2:not(.section-kicker) {
+  margin-bottom: 14px;
+  font-size: clamp(30px, 4vw, 50px);
+  font-weight: 800;
+}
+.cta-panel p {
+  max-width: 560px;
+  margin: 0 auto 28px;
+  color: #d0e1d5;
+  font-size: 16px;
+}
+
+/* Acciones y enlaces */
+.cta-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.cta-small {
+  margin-top: 14px;
+  color: #b4cbba;
+  font-size: 12.5px;
+}
+.cta-legal-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 22px;
+  padding: 10px 12px;
+  color: var(--lime);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  transition: opacity .2s;
+}
+.cta-legal-link:hover {
+  opacity: .75;
+}
+
+/* =============================================================
+   10. FOOTER
+   ============================================================= */
+
+.footer {
+  padding: 26px 0;
+  background: var(--forest-deep);
+  color: #aec3b6;
+}
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px 20px;
+  font-size: 12.5px;
+}
+.footer strong {
+  color: #e9f4e8;
+  letter-spacing: .04em;
+}
+
+/* =============================================================
+   11. CTA FIJO EN MÓVIL
+   (oculto por defecto; se muestra en la sección 14)
+   ============================================================= */
+
+.sticky-cta {
+  display: none;
+}
+
+/* =============================================================
+   12. ANIMACIONES
+   ============================================================= */
+
+/* Aparición al hacer scroll */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .7s var(--ease), transform .7s var(--ease);
+  transition-delay: var(--d, 0s);
+}
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Flotación (imagen del hero) */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* =============================================================
+   13. TABLET
+   ============================================================= */
+
+@media (max-width: 1100px) {
+  .steps .container {
+    width: min(100% - 48px, 1000px);
+  }
+  .steps-layout {
+    grid-template-columns: 1fr;
+  }
+  .steps-head {
+    position: static;
+  }
+  .step-text {
+    padding-right: 32%;
+  }
+}
+
+@media (max-width: 960px) {
+  .benefit-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .hero-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, .8fr);
+  }
+  .hero h1 {
+    font-size: clamp(34px, 4.4vw, 48px);
+  }
+}
+
+/* =============================================================
+   14. CELULAR
+   ============================================================= */
+
+/* Hero (≤ 700px)
+   Va ANTES del bloque de 760px a propósito: el de 760px debe seguir
+   ganando donde ambos definen lo mismo, igual que en el CSS original. */
+@media (max-width: 700px) {
+  .hero {
+    padding: 22px 0 45px;
+  }
+  .hero-layout {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  .hero-top-banner {
+    grid-column: 1;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 12px;
+  }
+}
+
+/* General (≤ 760px) */
+@media (max-width: 760px) {
+  /* Layout */
+  .container,
+  .steps .container {
+    width: calc(100% - 36px);
+  }
+
+  /* Header */
+  .nav-inner {
+    min-height: 86px;
+    gap: 10px;
+  }
+  .brand {
+    width: 150px;
+    height: 56px;
+    padding: 5px 12px;
+  }
+  .brand-logo {
+    width: 122px;
+    height: 42px;
+  }
+  .nav-link {
+    padding: 11px 14px;
+    font-size: 12px;
+  }
+
+  /* Hero */
+  .hero {
+    padding: 22px 0 48px;
+    background: linear-gradient(180deg, #315c46 0%, #204838 22%, #12362b 56%, #09221d 100%);
+  }
+  .hero-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 26px;
+    padding-top: 0;
+  }
+  .hero-top-banner {
+    grid-column: 1;
+    width: min(100%, 480px);
+    border-radius: 12px;
+  }
+  .hero-copy {
+    text-align: left;
+  }
+  .eyebrow {
+    font-size: 10px;
+    line-height: 1.45;
+    letter-spacing: .06em;
+    padding: 8px 12px;
+  }
+  .hero h1 {
+    margin: 20px 0 16px;
+    font-size: clamp(28px, 7.5vw, 36px);
+    line-height: 1.18;
+    letter-spacing: -.035em;
+  }
+  .hero-description {
+    font-size: 14px;
+    line-height: 1.65;
+    margin-bottom: 24px;
+  }
+  .hero .btn {
+    width: auto;
+    max-width: 100%;
+    font-size: 13px;
+    padding: 15px 20px;
+  }
+  .hero-image {
+    width: 88%;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+
+  /* Encabezados de sección */
+  .section-head {
+    margin-bottom: 28px;
+  }
+  .section-kicker {
+    font-size: 12px;
+  }
+
+  /* Beneficios */
+  .benefit-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .benefit-card {
+    display: grid;
+    grid-template-columns: 56px minmax(0, 1fr);
+    column-gap: 16px;
+    min-height: 0;
+    padding: 22px 20px;
+  }
+  .benefit-card .icon-wrap {
+    grid-row: span 2;
+    width: 52px;
+    height: 52px;
+    margin: 0;
+  }
+  .benefit-card h3 {
+    font-size: 17px;
+    margin-bottom: 6px;
+  }
+
+  /* Pasos */
+  .step {
+    min-height: 150px;
+    gap: 14px;
+    padding: 16px;
+    border-radius: 18px;
+  }
+  .step-number {
+    width: 44px;
+    height: 44px;
+    border-radius: 13px;
+    font-size: 16px;
+  }
+  .step-text {
+    padding-right: 26%;
+  }
+  .step h3 {
+    font-size: 16px;
+    line-height: 1.3;
+  }
+  .step p {
+    font-size: 12.5px;
+    line-height: 1.45;
+  }
+  .step-image {
+    width: 32%;
+  }
+
+  /* Audiencia: mantener hojas de fondo sin tapar el texto en celular. */
+  .audience {
+    padding: 64px 0 48px;
+    background-image:
+      linear-gradient(to bottom,
+        rgba(247, 250, 244, .96) 0%,
+        rgba(247, 250, 244, .92) 34%,
+        rgba(247, 250, 244, .43) 100%),
+      url("FondoFinal.png");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+  .audience .section-kicker,
+  .audience h2 {
+    color: #102f28;
+  }
+  .audience p {
+    color: #344b40;
+    font-size: 15px;
+  }
+  .audience-image-container {
+    margin-top: 24px;
+  }
+  .audience-image {
+    width: min(100%, 490px);
+  }
+  /* El CTA mantiene su fotografía sin repetición también en móvil. */
+  .cta {
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  /* CTA final */
+  .cta-panel {
+    padding: 48px 22px;
+    border-radius: 22px;
+  }
+  .cta-actions .btn {
+    width: 100%;
+  }
+
+  /* Footer */
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .footer {
+    padding-bottom: 96px;
+  }
+
+  /* CTA fijo */
+  .sticky-cta {
+    position: fixed;
+    left: 16px;
+    right: 16px;
+    bottom: max(16px, env(safe-area-inset-bottom));
+    z-index: 50;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    min-height: 54px;
+    background: var(--lime);
+    color: #153021;
+    border-radius: 16px;
+    font-family: Manrope, sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, .28);
+    opacity: 0;
+    transform: translateY(130%);
+    pointer-events: none;
+    transition: opacity .3s, transform .35s var(--ease);
+  }
+  .sticky-cta.is-visible {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+}
+
+/* Celulares pequeños (≤ 390px) */
+@media (max-width: 390px) {
+  .brand {
+    width: 132px;
+    height: 50px;
+  }
+  .brand-logo {
+    width: 106px;
+    height: 36px;
+  }
+  .nav-link {
+    padding: 10px 12px;
+    font-size: 11px;
+  }
+  .step {
+    min-height: 170px;
+  }
+  .step-text {
+    padding-right: 22%;
+  }
+  .step-image {
+    width: 29%;
+  }
+}
+
+/* =============================================================
+   15. ACCESIBILIDAD
+   ============================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
